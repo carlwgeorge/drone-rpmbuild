@@ -3,7 +3,6 @@
 """
 drone rpmbuild plugin
 
-PLUGIN_NAME             package name
 PLUGIN_SPEC             path to spec file
 PLUGIN_SOURCES          path to sources directory
 PLUGIN_DEFINE           extra definitions
@@ -35,12 +34,8 @@ except KeyError:
     raise SystemExit('DRONE_WORKSPACE: environment variable not set')
 
 
-# set the package name, fallback to the repo name
-name = os.environ.get('PLUGIN_NAME', repo_name)
-
-
-# set the spec file path, fallback to {name}.spec
-spec = os.path.join(workspace, os.environ.get('PLUGIN_SPEC', '{0}.spec'.format(name)))
+# set the spec file path, fallback to {repo_name}.spec
+spec = os.path.join(workspace, os.environ.get('PLUGIN_SPEC', '{0}.spec'.format(repo_name)))
 
 if not os.path.isfile(spec):
     raise SystemExit('{0}: file not found'.format(spec))

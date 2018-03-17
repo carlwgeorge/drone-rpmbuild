@@ -6,15 +6,6 @@ pipeline:
     image: rpmbuild:el7
 ```
 
-Use a package name that doesn't match the repo name:
-
-```diff
- pipeline:
-   build:
-     image: rpmbuild:el7
-+    name: pork
-```
-
 Specify an alternate paths for the spec file and/or sources directory:
 
 ```diff
@@ -65,16 +56,6 @@ docker run --rm \
   -e DRONE_REPO_NAME=beef \
   -e DRONE_WORKSPACE=/tmp/beef \
   rpmbuild:el7
-```
-
-Use a package name that doesn't match the repo name:
-
-```diff
- docker run --rm \
-   -e DRONE_REPO_NAME=beef \
-   -e DRONE_WORKSPACE=/tmp/beef \
-+  -e PLUGIN_NAME=pork \
-   rpmbuild:el7
 ```
 
 Specify an alternate paths for the spec file and/or sources directory:
