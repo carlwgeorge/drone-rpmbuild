@@ -6,12 +6,12 @@ The plugin script is a Python 2/3 script that is compatible with RHEL, CentOS, a
 
 ## Build
 
-Checkout the desired branch and then build the image.
+Dockerfiles for each distro are in separate branches.
 
-```
-git checkout el7
-docker build --pull --tag rpmbuild:el7 .
-```
+* RHEL 6: `docker build --pull --tag rpmbuild:el6 'https://github.com/carlwgeorge/drone-rpmbuild.git#el6'`
+* RHEL 7: `docker build --pull --tag rpmbuild:el7 'https://github.com/carlwgeorge/drone-rpmbuild.git#el7'`
+* CentOS 6: `docker build --pull --tag rpmbuild:c6 'https://github.com/carlwgeorge/drone-rpmbuild.git#c6'`
+* CentOS 7: `docker build --pull --tag rpmbuild:c7 'https://github.com/carlwgeorge/drone-rpmbuild.git#c7'`
 
 # Usage
 
