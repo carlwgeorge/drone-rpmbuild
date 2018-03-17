@@ -1,12 +1,14 @@
 # Plugin Usage
 
+By default, the plugin will build `${DRONE_WORKSPACE}/${DRONE_REPO_NAME}.spec`, using `${DRONE_WORKSPACE}` as the RPM sources directory.
+
 ```yaml
 pipeline:
   build:
     image: rpmbuild:el7
 ```
 
-Specify an alternate paths for the spec file and/or sources directory:
+Specify an alternate paths (relative to `${DRONE_WORKSPACE}`) for the spec file and/or sources directory:
 
 ```diff
  pipeline:
@@ -51,6 +53,8 @@ Add additional yum repositories during the build:
 
 # Direct Usage
 
+By default, the plugin will build `${DRONE_WORKSPACE}/${DRONE_REPO_NAME}.spec`, using `${DRONE_WORKSPACE}` as the RPM sources directory.
+
 ```
 docker run --rm \
   -e DRONE_REPO_NAME=beef \
@@ -58,7 +62,7 @@ docker run --rm \
   rpmbuild:el7
 ```
 
-Specify an alternate paths for the spec file and/or sources directory:
+Specify an alternate paths (relative to `${DRONE_WORKSPACE}`) for the spec file and/or sources directory:
 
 ```diff
  docker run --rm \
