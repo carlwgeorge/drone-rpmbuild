@@ -2,8 +2,11 @@ FROM centos:7
 RUN sed --expression '/tsflags=nodocs/d' --in-place /etc/yum.conf
 RUN sed --expression 's/\(%dist \.el7\)\.centos/\1/' /etc/rpm/macros.dist
 COPY epel7.repo /etc/yum.repos.d/epel.repo
-RUN yum --assumeyes install @buildsys-build rpmdevtools python2-sh; \
+RUN yum --assumeyes install @buildsys-build rpmdevtools python2-sh sudo; \
     yum clean all
 COPY plugin.py /
+RUN useradd drone
+RUN echo 'drone ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/drone
+USER drone:drone
 ENTRYPOINT ["/usr/bin/python"]
 CMD ["/plugin.py"]

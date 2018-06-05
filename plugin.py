@@ -34,6 +34,10 @@ except KeyError:
     raise SystemExit('DRONE_WORKSPACE: environment variable not set')
 
 
+# chown the workspace
+sh.sudo.chown('--recursive', 'drone:drone', workspace)
+
+
 # set the spec file path, fallback to {repo_name}.spec
 spec = os.path.join(workspace, os.environ.get('PLUGIN_SPEC', '{0}.spec'.format(repo_name)))
 
@@ -115,9 +119,9 @@ rpm_files = [glob(os.path.join(workspace, 'SRPMS', '*.src.rpm'))[0]]
 print('==> install build requirements')
 sys.stdout.flush()
 if sh.which('dnf'):
-    sh.dnf.builddep('--assumeyes', rpm_files[0], _fg=True)
+    sh.sudo.dnf.builddep('--assumeyes', rpm_files[0], _fg=True)
 else:
-    sh.yum_builddep('--assumeyes', rpm_files[0], _fg=True)
+    sh.sudo.yum_builddep('--assumeyes', rpm_files[0], _fg=True)
 
 
 print('==> build RPMs')
