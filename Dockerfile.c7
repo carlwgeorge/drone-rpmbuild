@@ -1,6 +1,7 @@
-FROM centos:6
+FROM centos:7
 RUN sed --expression '/tsflags=nodocs/d' --in-place /etc/yum.conf
-COPY epel.repo /etc/yum.repos.d/
+RUN sed --expression 's/\(%dist \.el7\)\.centos/\1/' /etc/rpm/macros.dist
+COPY epel7.repo /etc/yum.repos.d/epel.repo
 RUN yum --assumeyes install @buildsys-build rpmdevtools python2-sh; \
     yum clean all
 COPY plugin.py /

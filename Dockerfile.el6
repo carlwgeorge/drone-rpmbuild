@@ -5,7 +5,7 @@ RUN yum --disablerepo '*' repolist; \
     yum-config-manager --disable '*'; \
     yum-config-manager --enable rhel-6-server{,-optional,-extras}-rpms; \
     yum clean all
-COPY epel.repo /etc/yum.repos.d/
+COPY epel6.repo /etc/yum.repos.d/epel.repo
 RUN yum --assumeyes install @buildsys-build rpmdevtools python2-sh; \
     yum clean all
 COPY plugin.py /
