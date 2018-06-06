@@ -121,7 +121,7 @@ sys.stdout.flush()
 if sh.which('dnf'):
     sh.sudo.dnf.builddep('--assumeyes', rpm_files[0], _fg=True)
 else:
-    sh.sudo.yum_builddep('--assumeyes', rpm_files[0], _fg=True)
+    sh.sudo('yum-builddep', '--assumeyes', rpm_files[0], _fg=True)
 
 
 print('==> build RPMs')
