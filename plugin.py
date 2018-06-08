@@ -34,10 +34,6 @@ except KeyError:
     raise SystemExit('DRONE_WORKSPACE: environment variable not set')
 
 
-# chown the workspace
-sh.sudo.chown('--recursive', 'drone:drone', workspace)
-
-
 # set the spec file path, fallback to {repo_name}.spec
 spec = os.path.join(workspace, os.environ.get('PLUGIN_SPEC', '{0}.spec'.format(repo_name)))
 
